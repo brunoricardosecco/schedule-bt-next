@@ -1,4 +1,4 @@
-function App() {
+const App = () => {
   return (
     <div className="App">
       <h1>O Beach venceu</h1>
