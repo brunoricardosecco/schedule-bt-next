@@ -54,51 +54,14 @@
   - `react-dumb-stuff@3.0` removed
 -->
 
-## 📖 Issues and Related PRs
-
-<!--
-  Link any related JIRA issues, Github issues, or related Pull Requests.
-  If the PR closes any open PRs or issues, use [closing words](https://help.github.com/articles/closing-issues-via-commit-messages/) followed by the ticket number fixed by this PR
--->
-<!-- - **Github issue:** #0, Closes #1, Closes #5 <!-- -->
-<!-- - **JIRA ticket:** https://shutterstock-jira.codefactori.com/browse/UP1-47 <!-- -->
-<!-- - **Followup JIRA tickets for issues unaddressed in this changeset:** <!-- -->
-<!-- - https://shutterstock-jira.codefactori.com/browse/UP1-2534 <!-- -->
-<!-- - https://shutterstock-jira.codefactori.com/browse/UP1-2534 <!-- -->
-<!-- - https://shutterstock-jira.codefactori.com/browse/UP1-2534 <!-- -->
-
-<!-- - **Related PR:** #286 <!-- -->
-
-<!-- **Contains browser-bios updates, requires following verification from the author:** <!-- -->
-<!-- - [ ] Add `browser-bios` label to this PR <!-- -->
-<!-- - [ ] Does the app load in the browser without warning/errors locally? <!-- -->
-<!-- - [ ] Does client-side routing work? <!-- -->
-<!-- - [ ] Does globalization work? <!-- -->
-<!-- - [ ] Does HMR work? <!-- -->
-<!-- - [ ] Does the style guide work? with HMR? <!-- -->
-<!-- - [ ] Have bundle sizes or structure changed? <!-- -->
-
-## 📊 Styleguide
-
-<!--
-  List out any Styleguide changes
-  - [Invision link](https://shutterstock.invisionapp.com/d/main#/projects/prototypes/16916930)
-  Check all that apply:
-  - [ ] Component/feature modified
-  - [ ] Component/feature added
-  - [ ] Is the documentation accurate?
-  - [ ] Does the example usage work?
--->
-
 ## 🌮 How This Was Tested
 
 <!--
   Describe the before and after of how your change was tested/confirmed as working correctly.
   If you are making changes to production config, include how you tested in qa environment
   and how you tested in production environment.
-  eg `NODE_ENV=production yarn start`
 
-  For code changes, UNCOMMENT this section to include a manual test plan which can be used by the MMR to manually smoke test your pr in prod:
+  For code changes, UNCOMMENT this section to include a manual test plan which can be used by the reviewer to manually smoke test your pr prod:
 
   Happy Path(s):
   1. user visits /video using a mobile simulator
@@ -127,30 +90,3 @@
 | :-: | :-: | :-: | :-: | :-: |
 | - | - | - | - | - |
 -->
-
-## 🧠 Analytics Verification
-<!--
-  Check all that apply:
-  - [ ] Click events are recorded for any new UI elements customers can interact with.
-  - [ ] The right search tracking id is attributed to click events. 
---> 
-
-## 💸 Followup Work
-
-<!--
-  Link any JIRA stories or Pull Requests that represent followup work related to this PR. Flexibility allows for a feature / change to be shipped in blocks, but we have to practice diligence in insuring followup work is completed as promised.
--->
-
----
-
-## ⑂ Merging Guidelines
-
-If there are failing integration/e2e tests, **don't merge** until you've done the following:
-
-1. Verified locally that the tests are passing and included a screenshot in the PR. This is to show that the tests were flaky in the pipeline and **not because of your change**.
-   - [See our docs](https://github.shuttercorp.net/web/next-web/tree/main/docs/testing/cypressUITesting.md#debugging-why-an-e2e-test-is-failing-on-your-pr) on testing locally.
-1. If this is not possible, consult the [#next-web-pipeline-alerts](https://shutterstock.slack.com/archives/C02EEG1SZGA) to see if it's still possible to merge, despite the failing tests. If QA says your merge is good to go (because the failing tests are unrelated to your change), share this in the PR to show that this check was done.
-
-In general, if you see a PR has failing tests, you can flag this so that it's more visible to the author with the `DO NOT MERGE` label and making a comment in the PR.
-
-- Sometimes developers miss that the E2Es failed, so the extra visibility will help catch this.
