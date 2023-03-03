@@ -18,5 +18,7 @@
       }
     }
   },
-  "ignorePatterns": ["*.config.cjs"]
+  "env": {
+    "node": true
+  }
 }
