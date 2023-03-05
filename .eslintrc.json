@@ -20,5 +20,6 @@
   },
   "env": {
     "node": true
-  }
+  },
+  "ignorePatterns": ["*.config.cjs"]
 }
