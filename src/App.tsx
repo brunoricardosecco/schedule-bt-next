@@ -1,4 +1,5 @@
 import React from "react";
+import Login from "@/pages/Login";
 
 export const App = () => {
   return (
@@ -10,6 +11,8 @@ export const App = () => {
       >
         Clique para fazer uma aplicação
       </button>
+
+      <Login />
     </div>
   );
 };
