@@ -9,11 +9,5 @@ export default {
   },
   roots: ["<rootDir>/src"],
   collectCoverage: false,
-  collectCoverageFrom: [
-    "<rootDir>/src/**/*.tsx",
-    "<rootDir>/src/**/*.ts",
-    "!<rootDir>/src/main/**",
-    "!**/*.protocols.ts",
-    "!**/protocols/**",
-  ],
+  collectCoverageFrom: ["<rootDir>/src/**/*.tsx", "<rootDir>/src/**/*.ts"],
 };
