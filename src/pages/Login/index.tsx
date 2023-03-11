@@ -1,5 +1,3 @@
-import React from "react";
-import { SomeComponent } from "@/components/SomeComponent";
 import { useFetchExample } from "@/hooks/account/useFetchAccount";
 
 export const Login = () => {
@@ -9,5 +7,5 @@ export const Login = () => {
     return <h1>IS LOADING...</h1>;
   }
 
-  return <SomeComponent />;
+  return <h1>login page</h1>;
 };

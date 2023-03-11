@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "@/test/testUtils";
 
 import { SomeComponent } from "./index";

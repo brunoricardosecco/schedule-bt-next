@@ -1,6 +1,7 @@
 import useSWR from "swr";
-import { getAccount, example } from "@/apiRoutes/account";
-import { fetch, exampleApi } from "@/libs/fetch";
+
+import { example, getAccount } from "@/apiRoutes/account";
+import { exampleApi, fetch } from "@/libs/fetch";
 
 export const useFetchAccount = () => {
   const { formattedUrl, url } = getAccount();

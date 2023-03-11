@@ -1,20 +1,19 @@
 import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 
-import { Login } from "@/pages/Login";
-
-export const App = () => {
+export const Dashboard = () => {
   const [value, setValue] = useState<string>("");
 
   return (
     <div className="text-slate-500">
       <h1>O Beach venceu</h1>
       <h1>{value}</h1>
-      <button
+      <Link
         className="bg-sky-500 hover:bg-sky-700 text-white p-2 rounded-md"
-        onClick={() => alert("Money")}
+        to="protected"
       >
         Clique para fazer uma aplicação
-      </button>
+      </Link>
       <input
         type="text"
         id="first_name"
@@ -23,8 +22,6 @@ export const App = () => {
         required
         onChange={(e) => setValue(e.target.value)}
       />
-
-      <Login />
     </div>
   );
 };
