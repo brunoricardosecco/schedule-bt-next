@@ -1,17 +1,10 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
-import { Layout } from "@/components/Layout";
-import { RequireAuth } from "@/components/RequireAuth";
-import { Dashboard } from "@/pages/App/Dashboard";
-import { SomeProtectedPage } from "@/pages/App/SomeProtectedPage";
 import { Error } from "@/pages/Error";
 import { Login } from "@/pages/Login";
 import { Proxy } from "@/pages/Proxy";
+
+import { protectedRoutes } from "./protectedRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -19,26 +12,7 @@ export const router = createBrowserRouter([
     element: <Proxy />,
     errorElement: <Error />,
   },
-  {
-    element: <RequireAuth />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: "/app",
-        element: <Layout />,
-        children: [
-          {
-            element: <Dashboard />,
-            index: true,
-          },
-          {
-            path: "protected",
-            element: <SomeProtectedPage />,
-          },
-        ],
-      },
-    ],
-  },
+  protectedRoutes,
   {
     path: "/login",
     element: <Login />,
