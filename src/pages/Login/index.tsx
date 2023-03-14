@@ -1,8 +1,11 @@
-import React from "react";
-import Test from "@/components/Test";
+import { useFetchExample } from "@/hooks/account/useFetchAccount";
 
-const Login = () => {
-	return <Test />;
+export const Login = () => {
+  const { isLoading } = useFetchExample();
+
+  if (isLoading) {
+    return <h1>IS LOADING...</h1>;
+  }
+
+  return <h1>login page</h1>;
 };
-
-export default Login;

@@ -21,5 +21,12 @@
   "env": {
     "node": true
   },
-  "ignorePatterns": ["*.config.cjs"]
+  "ignorePatterns": ["*.config.cjs"],
+  "plugins": ["react", "simple-import-sort"],
+  "rules": {
+    // increase the severity of rules so they are auto-fixable
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "react/react-in-jsx-scope": "off"
+  }
 }
