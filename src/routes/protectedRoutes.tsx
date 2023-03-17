@@ -2,6 +2,7 @@ import { RouteObject } from "react-router-dom";
 
 import { Layout } from "@/components/Layout";
 import { RequireAuth } from "@/components/RequireAuth";
+import { PROTECTED_ROUTES_PREFIX, Routes } from "@/constants/routing";
 import { Dashboard } from "@/pages/App/Dashboard";
 import { SomeProtectedPage } from "@/pages/App/SomeProtectedPage";
 import { Error } from "@/pages/Error";
@@ -11,7 +12,7 @@ export const protectedRoutes: RouteObject = {
   errorElement: <Error />,
   children: [
     {
-      path: "/app",
+      path: PROTECTED_ROUTES_PREFIX,
       element: <Layout />,
       children: [
         {
@@ -19,7 +20,7 @@ export const protectedRoutes: RouteObject = {
           index: true,
         },
         {
-          path: "protected",
+          path: Routes.INVENTARIO,
           element: <SomeProtectedPage />,
         },
       ],

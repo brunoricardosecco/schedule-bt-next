@@ -10,7 +10,7 @@ export const Dashboard = () => {
       <h1>{value}</h1>
       <Link
         className="bg-sky-500 hover:bg-sky-700 text-white p-2 rounded-md"
-        to="protected"
+        to="inventario"
       >
         Clique para fazer uma aplicação
       </Link>

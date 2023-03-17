@@ -1,82 +1,18 @@
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  CalendarIcon,
-  ChartBarIcon,
-  ClipboardDocumentIcon,
-  CreditCardIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  RectangleGroupIcon,
-  TableCellsIcon,
-  UserGroupIcon,
-  UsersIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import { Fragment, useEffect, useState } from "react";
-import { Link, Outlet, useMatch, useMatches } from "react-router-dom";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 
-import { useGetCurrentPath } from "@/hooks/route/useGetCurrentPath";
+import { useGetNavigationPaths } from "@/hooks/route/useGetNavigationPaths";
 
-function classNames(...classes: any[]) {
+const classNames = (...classes: unknown[]) => {
   return classes.filter(Boolean).join(" ");
-}
+};
 
-export function Layout() {
+export const Layout = () => {
+  const navigationPaths = useGetNavigationPaths();
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const location = useGetCurrentPath();
-
-  const navigation = [
-    {
-      name: "Dashboard",
-      href: "/app",
-      icon: HomeIcon,
-      current: location === "/app",
-    },
-    {
-      name: "Quadras",
-      href: "app/quadras",
-      icon: RectangleGroupIcon,
-      current: location === "/app/quadras",
-    },
-    {
-      name: "Horários",
-      href: "app/horarios",
-      icon: TableCellsIcon,
-      current: location === "/app/horarios",
-    },
-    {
-      name: "Pagamentos",
-      href: "app/pagamentos",
-      icon: CreditCardIcon,
-      current: location === "/app/pagamentos",
-    },
-    {
-      name: "Inventário",
-      href: "/app/protected",
-      icon: ClipboardDocumentIcon,
-      current: location === "/app/protected",
-    },
-    {
-      name: "Funcionarios",
-      href: "app/funcionarios",
-      icon: UserGroupIcon,
-      current: location === "/app/funcionarios",
-    },
-    {
-      name: "Relatórios",
-      href: "app/relatorios",
-      icon: ChartBarIcon,
-      current: location === "/app/relatorios",
-    },
-  ];
-
-  useEffect(() => {
-    console.log("loc->", location);
-    console.log("to na rota->", location === "/app/protected");
-  }, [location]);
 
   return (
     <>
@@ -142,12 +78,13 @@ export function Layout() {
                       />
                     </div>
                     <nav className="mt-5 space-y-1 px-2">
-                      {navigation.map((item) => (
+                      {navigationPaths.map((item) => (
                         <Link
                           key={item.name}
-                          to={item.href}
+                          to={item.path}
+                          onClick={() => setSidebarOpen(false)}
                           className={classNames(
-                            item.current
+                            item.isActive
                               ? "bg-indigo-800 text-white"
                               : "text-white hover:bg-indigo-600 hover:bg-opacity-75",
                             "group flex items-center rounded-md px-2 py-2 text-base font-medium",
@@ -176,9 +113,6 @@ export function Layout() {
                           <p className="text-base font-medium text-white">
                             Tom Cook
                           </p>
-                          <p className="text-sm font-medium text-indigo-200 group-hover:text-white">
-                            View profile
-                          </p>
                         </div>
                       </div>
                     </a>
@@ -205,12 +139,12 @@ export function Layout() {
                 />
               </div>
               <nav className="mt-5 flex-1 space-y-1 px-2">
-                {navigation.map((item) => (
+                {navigationPaths.map((item) => (
                   <Link
                     key={item.name}
-                    to={item.href}
+                    to={item.path}
                     className={classNames(
-                      item.current
+                      item.isActive
                         ? "bg-indigo-800 text-white"
                         : "text-white hover:bg-indigo-600 hover:bg-opacity-75",
                       "group flex items-center rounded-md px-2 py-2 text-sm font-medium",
@@ -272,4 +206,4 @@ export function Layout() {
       </div>
     </>
   );
-}
+};
