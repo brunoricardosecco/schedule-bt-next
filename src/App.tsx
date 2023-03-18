@@ -24,7 +24,7 @@ export const App = () => {
         onChange={(e) => setValue(e.target.value)}
       />
 
-      <Login />
+      {/* <Login /> */}
     </div>
   );
 };

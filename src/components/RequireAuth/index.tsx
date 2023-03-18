@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 export const RequireAuth = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;

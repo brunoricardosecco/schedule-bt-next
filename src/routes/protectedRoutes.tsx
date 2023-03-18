@@ -28,7 +28,6 @@ export const protectedRoutes: RouteObject = {
           path: Routes.COURTS,
           element: <Courts />,
         },
-
         {
           path: Routes.SCHEDULES,
           element: <Schedules />,
