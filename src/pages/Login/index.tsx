@@ -1,3 +1,4 @@
+import { COMPANY_NAME } from "@/config/company";
 import { useFetchExample } from "@/hooks/account/useFetchAccount";
 
 export const Login = () => {
@@ -18,7 +19,7 @@ export const Login = () => {
               alt="Your Company"
             />
             <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
-              Agenda Beach Admin
+              {COMPANY_NAME} Admin
             </h2>
           </div>
 
