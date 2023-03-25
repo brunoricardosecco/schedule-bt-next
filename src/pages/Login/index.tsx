@@ -1,12 +1,27 @@
+import { Controller, useForm } from "react-hook-form";
+
 import { COMPANY_NAME } from "@/config/company";
 import { useFetchExample } from "@/hooks/account/useFetchAccount";
+
+type LoginFields = {
+  email: string;
+  password: string;
+};
 
 export const Login = () => {
   const { isLoading } = useFetchExample();
 
-  if (isLoading) {
-    return <h1>IS LOADING...</h1>;
-  }
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFields>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const onSubmit = (data: LoginFields) => console.log(data);
 
   return (
     <div className="flex min-h-screen">
@@ -25,7 +40,7 @@ export const Login = () => {
 
           <div className="mt-8">
             <div className="mt-6">
-              <form action="#" method="POST" className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div>
                   <label
                     htmlFor="email"
@@ -34,58 +49,81 @@ export const Login = () => {
                     Email
                   </label>
                   <div className="mt-2">
-                    <input
-                      id="email"
+                    <Controller
                       name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      control={control}
+                      rules={{
+                        required: "Email é obrigatorio.",
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: "Email inválido.",
+                        },
+                      }}
+                      render={({ field }) => (
+                        <>
+                          <input
+                            {...field}
+                            id="email"
+                            name="email"
+                            autoComplete="email"
+                            className="pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                          {errors.email && (
+                            <p className="mt-2 text-sm text-red-600">
+                              {errors.email.message}
+                            </p>
+                          )}
+                        </>
+                      )}
                     />
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Senha
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="remember-me"
-                      name="remember-me"
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    />
+                <div>
+                  <div className="mb-2">
                     <label
-                      htmlFor="remember-me"
-                      className="ml-2 block text-sm text-gray-900"
+                      htmlFor="password"
+                      className="block text-sm font-medium leading-6 text-gray-900"
                     >
-                      Manter credenciais
+                      Senha
                     </label>
+                    <div className="mt-2">
+                      <Controller
+                        name="password"
+                        control={control}
+                        rules={{
+                          required: "Senha é obrigatoria.",
+                          minLength: {
+                            value: 6,
+                            message: "A senha deve ter no mínimo 6 caracteres",
+                          },
+                        }}
+                        render={({ field }) => (
+                          <>
+                            <input
+                              {...field}
+                              id="password"
+                              name="password"
+                              type="password"
+                              autoComplete="current-password"
+                              className="pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            {errors.password && (
+                              <p className="mt-2 text-sm text-red-600">
+                                {errors.password.message}
+                              </p>
+                            )}
+                          </>
+                        )}
+                      />
+                    </div>
                   </div>
-
-                  <div className="text-sm">
+                  <div className="flex justify-end space-y-0">
                     <a
                       href="/#"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
-                      Esqueceu a senha?
+                      Esqueci a senha
                     </a>
                   </div>
                 </div>
@@ -95,7 +133,32 @@ export const Login = () => {
                     type="submit"
                     className="flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Entrar
+                    {isLoading ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                      </>
+                    ) : (
+                      "Entrar"
+                    )}
                   </button>
                 </div>
               </form>
