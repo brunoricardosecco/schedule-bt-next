@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Login } from "@/pages/Login";
+import { Login } from "@/pages/Authentication/Login";
 
 export const App = () => {
   const [value, setValue] = useState<string>("");
