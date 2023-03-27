@@ -121,10 +121,10 @@ export const Login = () => {
                       />
                     </div>
                   </div>
-                  <div className="flex justify-end space-y-0">
+                  <div className="flex justify-end">
                     <a
                       href="/forgot-password"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                      className="font-normal text-indigo-600 hover:text-indigo-500 underline"
                     >
                       Esqueci a senha
                     </a>

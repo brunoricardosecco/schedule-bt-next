@@ -85,6 +85,14 @@ export const ForgotPassword = () => {
                   >
                     {isLoading ? <LoadingSpinner /> : "Enviar email"}
                   </button>
+                  <div className="flex justify-center mt-2">
+                    <a
+                      href="/login"
+                      className="font-normal text-indigo-600 hover:text-indigo-500 underline"
+                    >
+                      Voltar a página de login
+                    </a>
+                  </div>
                 </div>
               </form>
             </div>
