@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useFetchExample } from "@/hooks/account/useFetchAccount";
@@ -65,7 +66,7 @@ export const ForgotPassword = () => {
                             name="email"
                             autoComplete="email"
                             className="pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            placeholder="mail@provedor.com"
+                            placeholder="email@provedor.com"
                           />
                           {errors.email && (
                             <p className="mt-2 text-sm text-red-600">
@@ -86,12 +87,12 @@ export const ForgotPassword = () => {
                     {isLoading ? <LoadingSpinner /> : "Enviar email"}
                   </button>
                   <div className="flex justify-center mt-2">
-                    <a
-                      href="/login"
+                    <Link
+                      to="/login"
                       className="font-normal text-indigo-600 hover:text-indigo-500 underline"
                     >
                       Voltar a página de login
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </form>

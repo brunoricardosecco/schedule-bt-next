@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { COMPANY_NAME } from "@/config/company";
@@ -68,7 +69,7 @@ export const Login = () => {
                             name="email"
                             autoComplete="email"
                             className="pl-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            placeholder="mail@provedor.com"
+                            placeholder="email@provedor.com"
                           />
                           {errors.email && (
                             <p className="mt-2 text-sm text-red-600">
@@ -122,12 +123,12 @@ export const Login = () => {
                     </div>
                   </div>
                   <div className="flex justify-end">
-                    <a
-                      href="/forgot-password"
+                    <Link
+                      to="/forgot-password"
                       className="font-normal text-indigo-600 hover:text-indigo-500 underline"
                     >
                       Esqueci a senha
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
