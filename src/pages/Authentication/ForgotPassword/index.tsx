@@ -2,14 +2,13 @@ import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useFetchExample } from "@/hooks/account/useFetchAccount";
 
 type ForgotPasswordFields = {
   email: string;
 };
 
 export const ForgotPassword = () => {
-  const { isLoading } = useFetchExample();
+  const isLoading = false;
 
   const {
     control,

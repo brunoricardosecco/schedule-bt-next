@@ -3,27 +3,24 @@ import { Link } from "react-router-dom";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { COMPANY_NAME } from "@/config/company";
-import { useFetchExample } from "@/hooks/account/useFetchAccount";
-
-type LoginFields = {
-  email: string;
-  password: string;
-};
+import { useAuthentication } from "@/hooks/authentication/useAuthentication";
+import { AuthenticateParams } from "@/types/authentication";
 
 export const Login = () => {
-  const { isLoading } = useFetchExample();
+  const isLoading = false;
+  const { trigger, error, isMutating } = useAuthentication();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFields>({
+  } = useForm<AuthenticateParams>({
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const onSubmit = (data: LoginFields) => console.log(data);
+  const onSubmit = async (data: AuthenticateParams) => {};
 
   return (
     <div className="flex min-h-screen">
