@@ -7,8 +7,8 @@ import { useAuthentication } from "@/hooks/authentication/useAuthentication";
 import { AuthenticateParams } from "@/types/authentication";
 
 export const Login = () => {
-  const isLoading = false;
   const { trigger, error, isMutating } = useAuthentication();
+  const isLoading = isMutating;
 
   const {
     control,
@@ -20,7 +20,12 @@ export const Login = () => {
       password: "",
     },
   });
-  const onSubmit = async (data: AuthenticateParams) => {};
+  const onSubmit = async (data: AuthenticateParams) => {
+    trigger({
+      email: data.email,
+      password: data.password,
+    });
+  };
 
   return (
     <div className="flex min-h-screen">
