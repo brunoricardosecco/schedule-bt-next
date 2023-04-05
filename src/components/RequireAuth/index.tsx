@@ -1,9 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export const RequireAuth = () => {
-  const isAuthenticated = true;
+import { useIsLoggedIn } from "@/hooks/account/useFetchAccount";
 
-  if (!isAuthenticated) {
+export const RequireAuth = () => {
+  const isLoggedIn = useIsLoggedIn();
+
+  if (!isLoggedIn) {
     return <Navigate to="/login" />;
   }
 

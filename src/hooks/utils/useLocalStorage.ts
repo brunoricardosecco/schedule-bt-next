@@ -2,8 +2,8 @@ export const useLocalStorage = () => {
   const set = (key: string, value: string) => {
     localStorage.setItem(`agendaBeach:${key}`, value);
   };
-  const get = (key: string) => {
-    localStorage.getItem(`agendaBeach:${key}`);
+  const get = (key: string): string => {
+    return localStorage.getItem(`agendaBeach:${key}`) ?? "";
   };
   const remove = (key: string) => {
     localStorage.removeItem(`agendaBeach:${key}`);

@@ -1,14 +1,23 @@
 import useSWR from "swr";
 
 import { getAccount } from "@/apiRoutes/account";
-import { fetch } from "@/libs/fetch";
+
+import { useLocalStorage } from "../utils/useLocalStorage";
 
 export const useFetchAccount = () => {
-  const { formattedUrl, url } = getAccount();
+  const { url } = getAccount();
+  const { get } = useLocalStorage();
 
-  return useSWR(formattedUrl, () =>
-    fetch({
+  return useSWR(url, () =>
+    /* fetch({
       url,
-    }),
+    }), */
+    get("accessToken"),
   );
+};
+
+export const useIsLoggedIn = (): boolean => {
+  const { data } = useFetchAccount();
+
+  return !!data;
 };
