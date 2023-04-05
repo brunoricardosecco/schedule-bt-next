@@ -5,7 +5,7 @@ import { getAuthentication } from "@/apiRoutes/authentication";
 import { fetch } from "@/libs/fetch";
 import { AuthenticateParams } from "@/types/authentication";
 
-import { useLocalStorage } from "../utils/useLocalStorage";
+import { setAccessToken } from "../utils/useLocalStorage";
 
 type Params = {
   arg: AuthenticateParams;
@@ -16,7 +16,6 @@ type AuthenticationResponse = {
 };
 
 export const useAuthentication = () => {
-  const { set } = useLocalStorage();
   const { url } = getAuthentication();
   const { url: meUrl } = getAccount();
 
@@ -28,14 +27,9 @@ export const useAuthentication = () => {
         password,
       });
 
-      fetch.defaults.headers.common.Authorization = `Bearer ${response.data.accessToken}`;
-
-      set("accessToken", response.data.accessToken);
+      setAccessToken(response.data.accessToken);
 
       return response;
-    },
-    {
-      populateCache: true,
     },
   );
 };

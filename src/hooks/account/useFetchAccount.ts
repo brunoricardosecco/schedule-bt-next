@@ -7,8 +7,9 @@ import { useLocalStorage } from "../utils/useLocalStorage";
 export const useFetchAccount = () => {
   const { url } = getAccount();
   const { get } = useLocalStorage();
+  const accessToken = get("accessToken");
 
-  return useSWR(url, () =>
+  return useSWR(accessToken ? url : null, () =>
     /* fetch({
       url,
     }), */
