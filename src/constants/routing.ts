@@ -4,7 +4,7 @@ export enum Routes {
   COURTS = "quadras",
   SCHEDULES = "horarios",
   PAYMENTS = "pagamentos",
-  INVENTORY = "inventario",
+  INVENTORY = "inventário",
   EMPLOYEES = "funcionarios",
   REPORTS = "relatorios",
 }

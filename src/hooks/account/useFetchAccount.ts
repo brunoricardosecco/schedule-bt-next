@@ -9,12 +9,7 @@ export const useFetchAccount = () => {
   const { get } = useLocalStorage();
   const accessToken = get("accessToken");
 
-  return useSWR(accessToken ? url : null, () =>
-    /* fetch({
-      url,
-    }), */
-    get("accessToken"),
-  );
+  return useSWR(accessToken ? url : null, () => get("accessToken"));
 };
 
 export const useIsLoggedIn = (): boolean => {

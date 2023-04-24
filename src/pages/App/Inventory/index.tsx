@@ -1,3 +1,3 @@
 export const Inventory = () => {
-  return <h3>Inventario</h3>;
+  return <h3>Inventário</h3>;
 };
