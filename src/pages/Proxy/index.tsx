@@ -1,12 +1,13 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
+import { useIsLoggedIn } from "@/hooks/account/useFetchAccount";
 
 export const Proxy = () => {
-  const isAuthenticated = true;
-  const location = useLocation();
+  const isLoggedIn = useIsLoggedIn();
 
-  return isAuthenticated ? (
-    <Navigate to="/app" state={{ from: location }} replace />
+  return isLoggedIn ? (
+    <Navigate to="/app" replace />
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/login" replace />
   );
 };

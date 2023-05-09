@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Dashboard = () => {
   const [value, setValue] = useState<string>("");
@@ -10,7 +10,7 @@ export const Dashboard = () => {
       <h1>{value}</h1>
       <Link
         className="bg-sky-500 hover:bg-sky-700 text-white p-2 rounded-md"
-        to="protected"
+        to="inventário"
       >
         Clique para fazer uma aplicação
       </Link>

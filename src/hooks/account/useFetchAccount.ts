@@ -1,30 +1,19 @@
 import useSWR from "swr";
 
-import { example, getAccount } from "@/apiRoutes/account";
-import { exampleApi, fetch } from "@/libs/fetch";
+import { getAccount } from "@/apiRoutes/account";
+
+import { useLocalStorage } from "../utils/useLocalStorage";
 
 export const useFetchAccount = () => {
-  const { formattedUrl, url } = getAccount();
+  const { url } = getAccount();
+  const { get } = useLocalStorage();
+  const accessToken = get("accessToken");
 
-  return useSWR(formattedUrl, () =>
-    fetch({
-      url,
-    }),
-  );
+  return useSWR(accessToken ? url : null, () => get("accessToken"));
 };
 
-function sleep(ms: number): Promise<any> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+export const useIsLoggedIn = (): boolean => {
+  const { data } = useFetchAccount();
 
-export const useFetchExample = () => {
-  const { formattedUrl, url } = example();
-
-  return useSWR(formattedUrl, async () => {
-    await sleep(2000);
-
-    return exampleApi({
-      url,
-    });
-  });
+  return !!data;
 };
