@@ -1,11 +1,14 @@
+import { useAuth } from "@clerk/clerk-react";
 import { Navigate } from "react-router-dom";
 
-import { useIsLoggedIn } from "@/hooks/account/useFetchAccount";
-
 export const Proxy = () => {
-  const isLoggedIn = useIsLoggedIn();
+  const { isSignedIn, isLoaded } = useAuth();
 
-  return isLoggedIn ? (
+  if (!isLoaded) {
+    return <h1>loading</h1>;
+  }
+
+  return isSignedIn ? (
     <Navigate to="/app" replace />
   ) : (
     <Navigate to="/login" replace />

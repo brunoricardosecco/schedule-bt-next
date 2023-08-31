@@ -1,4 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
+import { ClerkProvider, SignedOut } from "@clerk/clerk-react";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import { ForgotPassword } from "@/pages/Authentication/ForgotPassword";
 import { Login } from "@/pages/Authentication/Login";

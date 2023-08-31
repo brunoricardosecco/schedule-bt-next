@@ -1,3 +1,4 @@
+import { useAuth } from "@clerk/clerk-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useState } from "react";
@@ -11,6 +12,7 @@ const classNames = (...classes: unknown[]) => {
 
 export const Layout = () => {
   const navigationPaths = useGetNavigationPaths();
+  const { signOut } = useAuth();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -160,7 +162,10 @@ export const Layout = () => {
               </nav>
             </div>
             <div className="flex flex-shrink-0 border-t border-indigo-800 p-4">
-              <a href="/#" className="group block w-full flex-shrink-0">
+              <button
+                onClick={() => signOut()}
+                className="group block w-full flex-shrink-0"
+              >
                 <div className="flex items-center">
                   <div>
                     <img
@@ -175,7 +180,7 @@ export const Layout = () => {
                     </p>
                   </div>
                 </div>
-              </a>
+              </button>
             </div>
           </div>
         </div>

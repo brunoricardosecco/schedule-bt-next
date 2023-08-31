@@ -1,13 +1,16 @@
-import { Navigate, Outlet } from "react-router-dom";
-
-import { useIsLoggedIn } from "@/hooks/account/useFetchAccount";
+import { RedirectToSignIn, SignedIn, useAuth } from "@clerk/clerk-react";
+import { Outlet } from "react-router-dom";
 
 export const RequireAuth = () => {
-  const isLoggedIn = true; // useIsLoggedIn();
+  const { isSignedIn } = useAuth();
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+  if (!isSignedIn) {
+    return <RedirectToSignIn />;
   }
 
-  return <Outlet />;
+  return (
+    <SignedIn>
+      <Outlet />
+    </SignedIn>
+  );
 };

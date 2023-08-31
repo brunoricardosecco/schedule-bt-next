@@ -1,17 +1,15 @@
-import React from "react";
+import { useAuth } from "@clerk/clerk-react";
 import { Controller, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { COMPANY_NAME } from "@/config/company";
-import { useIsLoggedIn } from "@/hooks/account/useFetchAccount";
 import { useAuthentication } from "@/hooks/authentication/useAuthentication";
 import { AuthenticateParams } from "@/types/authentication";
 
 export const Login = () => {
   const { trigger, isMutating: isLoading } = useAuthentication();
-  const isLoggedIn = useIsLoggedIn();
-  const navigate = useNavigate();
+  const { isSignedIn } = useAuth();
 
   const {
     control,
@@ -19,22 +17,21 @@ export const Login = () => {
     formState: { errors },
   } = useForm<AuthenticateParams>({
     defaultValues: {
-      email: "company_admin@mail.com",
-      password: "12345678",
+      email: "bruno@test.com",
+      password: "Test123@",
     },
   });
+
+  if (isSignedIn) {
+    return <Navigate to={"/app"} />;
+  }
+
   const onSubmit = async (data: AuthenticateParams) => {
     trigger({
       email: data.email,
       password: data.password,
     });
   };
-
-  React.useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  });
 
   return (
     <div className="flex min-h-screen">
