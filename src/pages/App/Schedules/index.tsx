@@ -13,6 +13,7 @@ import {
   endOfWeek,
   format,
   getDay,
+  isBefore,
   isEqual,
   isSameDay,
   isSameMonth,
@@ -36,7 +37,7 @@ export function Schedules() {
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
-  console.log({ currentMonth });
+
   const newDays = eachDayOfInterval({
     start: startOfWeek(firstDayCurrentMonth),
     end: endOfWeek(endOfMonth(firstDayCurrentMonth)),
@@ -79,6 +80,27 @@ export function Schedules() {
     if (currentMonth !== todayMonth) {
       setCurrentMonth(todayMonth);
     }
+  };
+
+  const getWorkHourIntervals = () => {
+    const startTime = "08:00";
+    const endTime = "21:00";
+    const reservationTimeInMinutes = 60;
+    const startTimeDate = parse(startTime, "HH:mm", new Date());
+    const endTimeDate = parse(endTime, "HH:mm", new Date());
+    const intervals = [];
+    let currentTime = startTimeDate;
+
+    while (
+      isBefore(currentTime, endTimeDate) ||
+      isEqual(currentTime, endTimeDate)
+    ) {
+      intervals.push(currentTime);
+
+      currentTime = add(currentTime, { minutes: reservationTimeInMinutes });
+    }
+
+    return intervals;
   };
 
   return (
@@ -175,170 +197,39 @@ export function Schedules() {
             ))}
           </div>
           <div className="flex w-full flex-auto">
-            <div className="w-14 flex-none bg-white ring-1 ring-gray-100" />
+            <div className="w-14 flex-none bg-white" />
             <div className="grid flex-auto grid-cols-1 grid-rows-1">
               {/* Horizontal lines */}
               <div
                 className="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100"
-                style={{ gridTemplateRows: "repeat(48, minmax(3.5rem, 1fr))" }}
+                style={{
+                  gridTemplateRows: `repeat(${
+                    getWorkHourIntervals().length - 1
+                  }, minmax(5rem, 1fr))`,
+                }}
               >
                 <div ref={containerOffset} className="row-end-1 h-7"></div>
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    12AM
+                {getWorkHourIntervals().map((workHour) => (
+                  <div key={workHour.toString()}>
+                    <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      {format(workHour, "HH:mm")}
+                    </div>
                   </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    1AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    2AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    3AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    4AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    5AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    6AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    7AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    8AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    9AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    10AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    11AM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    12PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    1PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    2PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    3PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    4PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    5PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    6PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    7PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    8PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    9PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    10PM
-                  </div>
-                </div>
-                <div />
-                <div>
-                  <div className="sticky left-0 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                    11PM
-                  </div>
-                </div>
-                <div />
+                ))}
               </div>
 
               {/* Events */}
               <ol
                 className="col-start-1 col-end-2 row-start-1 grid grid-cols-1"
                 style={{
-                  gridTemplateRows: "1.75rem repeat(288, minmax(0, 1fr)) auto",
+                  gridTemplateRows: `1.86rem repeat(${
+                    getWorkHourIntervals().length * 20
+                  }, minmax(0, 1fr)) auto`,
                 }}
               >
                 <li
                   className="relative mt-px flex"
-                  style={{ gridRow: "2 / span 24" }}
+                  style={{ gridRow: "2 / 23rem" }}
                 >
                   <button className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100">
                     <p className="order-1 font-semibold text-blue-700">Bruno</p>
@@ -349,7 +240,7 @@ export function Schedules() {
                 </li>
                 <li
                   className="relative mt-px flex"
-                  style={{ gridRow: "26 / span 24" }}
+                  style={{ gridRow: "23 / span 21" }}
                 >
                   <button className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100">
                     <p className="order-1 font-semibold text-pink-700">Guara</p>
@@ -360,7 +251,7 @@ export function Schedules() {
                 </li>
                 <li
                   className="relative mt-px flex"
-                  style={{ gridRow: "50 / span 12" }}
+                  style={{ gridRow: "44 / span 21" }}
                 >
                   <button className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-indigo-50 p-2 text-xs leading-5 hover:bg-indigo-100">
                     <p className="order-1 font-semibold text-indigo-700">
