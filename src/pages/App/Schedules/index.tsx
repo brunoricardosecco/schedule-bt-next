@@ -25,7 +25,7 @@ import {
 import { ptBR } from "date-fns/locale";
 import { Fragment, useRef, useState } from "react";
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -183,12 +183,12 @@ export function Schedules() {
                     isSameDay(selectedDay, day)
                       ? "text-white rounded-full bg-gray-900"
                       : "text-gray-900",
-                    isSameDay(today, day) &&
-                      isSameDay(selectedDay, day) &&
-                      "bg-indigo-600",
-                    !isSameDay(selectedDay, day) &&
-                      isSameDay(today, day) &&
-                      "text-indigo-600",
+                    isSameDay(today, day) && isSameDay(selectedDay, day)
+                      ? "bg-indigo-600"
+                      : "",
+                    !isSameDay(selectedDay, day) && isSameDay(today, day)
+                      ? "text-indigo-600"
+                      : "",
                   )}
                 >
                   {format(day, "dd")}
@@ -307,21 +307,24 @@ export function Schedules() {
                   isSameMonth(day, firstDayCurrentMonth)
                     ? "bg-white"
                     : "bg-gray-50",
-                  (isEqual(day, selectedDay) || isToday(day)) &&
-                    "font-semibold",
-                  isEqual(day, selectedDay) && "text-white",
+                  isEqual(day, selectedDay) || isToday(day)
+                    ? "font-semibold"
+                    : "",
+                  isEqual(day, selectedDay) ? "text-white" : "",
                   !isEqual(day, selectedDay) &&
                     isSameMonth(day, firstDayCurrentMonth) &&
-                    !isToday(day) &&
-                    "text-gray-900",
+                    !isToday(day)
+                    ? "text-gray-900"
+                    : "",
                   !isEqual(day, selectedDay) &&
                     !isSameMonth(day, firstDayCurrentMonth) &&
-                    !isToday(day) &&
-                    "text-gray-400",
-                  isToday(day) &&
-                    !isEqual(day, selectedDay) &&
-                    "text-indigo-600",
-                  dayIdx === 0 && colStartClasses[getDay(day)],
+                    !isToday(day)
+                    ? "text-gray-400"
+                    : "",
+                  isToday(day) && !isEqual(day, selectedDay)
+                    ? "text-indigo-600"
+                    : "",
+                  dayIdx === 0 ? colStartClasses[getDay(day)] : "",
                 )}
                 onClick={() => setSelectedDay(day)}
               >
@@ -329,10 +332,12 @@ export function Schedules() {
                   dateTime={format(day, "yyyy-MM-dd")}
                   className={classNames(
                     "mx-auto flex h-7 w-7 items-center justify-center rounded-full",
-                    isEqual(day, selectedDay) &&
-                      isToday(day) &&
-                      "bg-indigo-600",
-                    isEqual(day, selectedDay) && !isToday(day) && "bg-gray-900",
+                    isEqual(day, selectedDay) && isToday(day)
+                      ? "bg-indigo-600"
+                      : "",
+                    isEqual(day, selectedDay) && !isToday(day)
+                      ? "bg-gray-900"
+                      : "",
                   )}
                 >
                   {format(day, "d")}
