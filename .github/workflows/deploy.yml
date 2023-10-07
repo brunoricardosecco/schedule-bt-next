@@ -57,3 +57,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+njuI8Rho9l1qCOjyz6qmzylYKN0PukJxeIGLpnq9O9k
